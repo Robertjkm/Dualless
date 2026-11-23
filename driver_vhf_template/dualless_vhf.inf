@@ -1,0 +1,45 @@
+; dualless_vhf.inf — Plantilla INF para driver experimental KMDF/VHF de Dualless
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = %ManufacturerName%
+CatalogFile = dualless_vhf.cat
+DriverVer   = 11/23/2026,1.3.0.0
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[Manufacturer]
+%ManufacturerName% = Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceDesc% = DuallessVhf_Install, Root\DuallessVhf
+
+[DuallessVhf_Install.NT]
+CopyFiles = Drivers_Dir
+
+[Drivers_Dir]
+dualless_vhf.sys
+
+[DuallessVhf_Install.NT.HW]
+AddReg = DuallessVhf_AddReg
+
+[DuallessVhf_AddReg]
+HKR,,"LowerFilters",0x00010008,"vhf"
+
+[DuallessVhf_Install.NT.Services]
+AddService = DuallessVhf, 0x00000002, DuallessVhf_Service_Inst
+
+[DuallessVhf_Service_Inst]
+DisplayName    = %ServiceDesc%
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %13%\dualless_vhf.sys
+
+[Strings]
+ManufacturerName = "Dualless Project"
+DeviceDesc       = "Dualless Virtual DualSense HID (Experimental WDK)"
+ServiceDesc      = "Dualless Virtual HID Framework Driver"

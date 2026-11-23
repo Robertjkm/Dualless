@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build / Packaging
+build/
+dist/
+*.spec
+*.exe
+installer/*.sed
+
+# User runtime data
+settings.json
+profiles/*.json
+!profiles/.gitkeep
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
